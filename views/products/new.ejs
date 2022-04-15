@@ -1,0 +1,19 @@
+<%- include("../partials/header")%>
+    <%- include("../partials/navbar")%>
+
+        <main id="form">
+            <form action="/products" method="POST">
+                <legend for="name">Name</legend>
+                <input type="text" name="name" id="name" placeholder="Enter Product Name" required><br><br>
+                <legend for="price">Price</legend>
+                <input type="text" name="price" id="price" placeholder="Enter Product Price" required><br><br>
+                <legend for="img">Image</legend>
+                <input type="text" name="img" id="img" placeholder="Enter Product Image URL"><br><br>
+                <legend for="img">Description</legend>
+                <textarea name="desc" id="desc" placeholder="Enter Product Description" rows="5"
+                    cols="50"></textarea><br><br>
+                <button type="submit">Submit</button>
+            </form>
+        </main>
+
+        <%- include("../partials/footer")%>

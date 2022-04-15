@@ -1,0 +1,21 @@
+<%- include("../partials/header")%>
+<%- include("../partials/navbar")%>
+
+
+<main id="form">
+    <form action="/products/<%=product._id%>?_method=PATCH" method="POST">
+        <legend for="name">Name</legend>
+        <input type="text" name="name" id="name" value="<%=product.name%>"><br><br>
+        <legend for="price">Price</legend>
+        <input type="text" name="price" id="price" value="<%=product.price%>"><br><br>
+        <legend for="img">Image</legend>
+        <input type="text" name="img" id="img" value="<%=product.img%>"><br><br>
+        <legend for="img">Description</legend>
+        <textarea name="desc" id="desc" rows="5" cols="50"><%=product.desc%></textarea><br><br>
+        <button type="submit">Submit</button>
+    </form>
+</main>
+
+
+
+<%- include("../partials/footer")%>
