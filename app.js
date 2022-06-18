@@ -3,6 +3,7 @@ const app=express();
 const mongoose=require("mongoose");
 const path=require("path");
 const routes=require("./routes/ec-routes");
+const authRoutes=require("./routes/authenticationRoutes")
 const seed=require("./seed");
 const methodOverride=require("method-override")
 const session=require("express-session");
@@ -26,6 +27,11 @@ const sessionConfig={
 }
 app.use(session(sessionConfig));
 app.use(flash());
+app.use((req,res,next)=>{
+    res.locals.success=req.flash("success");
+    res.locals.error=req.flash("error");
+    next();
+})
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new localStrategy(User.authenticate()));
@@ -34,6 +40,7 @@ passport.deserializeUser(User.deserializeUser());
 
 
 app.use(routes);
+app.use(authRoutes);
 //seed();
 app.get("/",(req,res)=>{
     res.send("Home page");

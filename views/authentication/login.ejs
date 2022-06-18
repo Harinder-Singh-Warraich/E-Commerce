@@ -1,0 +1,14 @@
+<%- include("../partials/header")%>
+    <%- include("../partials/navbar")%>
+
+        <main id="form">
+            <form action="/login" method="POST">
+                <legend for="username">UserName</legend>
+                <input type="text" name="username" id="username" placeholder="Enter UserName" required><br><br>
+                <legend for="password">Password</legend>
+                <input type="password" name="password" id="password" placeholder="Enter Password"><br><br>
+                <button type="submit">Login</button>
+            </form>
+        </main>
+
+        <%- include("../partials/footer")%>

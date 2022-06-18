@@ -19,7 +19,9 @@ router.post("/products",async (req,res)=>{
     const product={
         ...req.body
     }
+    console.log(product);
     await Product.create(product);
+    req.flash("success","Product added successfully");
     res.redirect("/products");
 })
 
