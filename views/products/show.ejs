@@ -1,6 +1,7 @@
 <%- include("../partials/header")%>
     <%- include("../partials/navbar")%>
         <main>
+            <%- include("../partials/flash")%>
             <table>
                 <tr>
                     <td>
@@ -10,9 +11,22 @@
                                 <h4><%=product.name%></h4>
                                 <p><%=product.desc%></p>
                                 <h4>Rs. <%=product.price%></h4>
-                                <a href=""><button id="buy" type="submit">Buy</button></a>
-                                <a href=""><button id="atc" type="submit">Add to cart</button></a>
-                                <a href="/products/<%=product._id%>/edit"><button id="edit" type="submit">Edit</button></a>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <a href=""><button id="buy" type="submit">Buy</button></a>
+                                        </td>
+                                        <td>
+                                            <form action="/products/<%=product._id%>/add" method="POST">
+                                                <button id="atc" type="submit">Add to cart</button>
+                                            </form>
+                                        </td>
+                                        <td>
+                                            <a href="/products/<%=product._id%>/edit"><button id="edit" type="submit">Edit</button></a>
+                                        </td>        
+                                    </tr>
+                                </table>
+                                
                                 <form action="/products/<%=product._id%>?_method=DELETE" method="POST">
                                     <button id="delete" type="submit">Delete</button>
                                 </form>
@@ -29,7 +43,8 @@
                         </form>
                         <%for(let review of product.reviews){%>
                         <div id="comments">
-                            <p><b>Rating</b><br><%=review.rating%></p>
+                            <p><b>Reviewed By: </b><%=review.user%></p>
+                            <p><b>Rating: </b><%=review.rating%></p>
                             <p><%=review.comment%></p>
                         </div>
                         <%}%>

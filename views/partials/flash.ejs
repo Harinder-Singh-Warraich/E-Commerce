@@ -1,10 +1,24 @@
 <%if(success.length){%>
 <div class="flash-success">
-    <p><%=success%></p>
+    <p><%=success%><span id="close">&times;</span></p>
 </div>
+<script>
+        var closebtn=document.getElementById("close");
+    closebtn.onclick=function (){
+        this.parentNode.remove()
+        return false;
+    };
+</script>
 <%}%>
 <%if(error.length){%>
     <div class="flash-error">
-        <p><%=error%></p>
+        <p><%=error%><span id="close">&times;</span></p>
     </div>
+    <script>
+        var closebtn=document.getElementById("close");
+        closebtn.onclick=function (){
+            this.parentNode.remove()
+            return false;
+        };
+    </script>
 <%}%>

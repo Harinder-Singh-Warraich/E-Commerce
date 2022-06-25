@@ -9,7 +9,13 @@ const userSchema = new mongoose.Schema({
         trim: true,
         required: true,
         unique: true 
-    }
+    },
+    cart:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref:"Product"
+        }
+    ]
 })
 
 

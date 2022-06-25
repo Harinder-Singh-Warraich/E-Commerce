@@ -1,0 +1,26 @@
+<%- include("../partials/header")%>
+<%- include("../partials/navbar")%>
+<main>
+    <%- include("../partials/flash")%>
+    <h1>Your Cart</h1>
+    <br>
+    <%let tp=0;
+    for(let item of user.cart){
+        tp+=item.price;
+    }%>
+    <p><b>Total price:</b> <%=tp%></p>
+    <div id="cart-contents">
+        <%for(let item of user.cart){%>
+            <div id="cart-card">
+                <img style="width: 100%;" src="<%-item.img%>">
+                <h4><%=item.name%></h4>
+                <h4>Rs. <%=item.price%></h4>
+                <form action="/cart/<%=item._id%>?_method=PATCH" method="POST">
+                    <button id="delete" type="submit">Remove</button>
+                </form>
+            </div>
+        <%}%>
+    </div>
+
+</main>
+<%- include("../partials/footer")%>

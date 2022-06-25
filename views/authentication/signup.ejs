@@ -1,7 +1,9 @@
 <%- include("../partials/header")%>
     <%- include("../partials/navbar")%>
+    <%- include("../partials/flash")%>;
 
         <main id="form">
+            <h1>SignUp</h1>
             <form action="/register" method="POST">
                 <legend for="username">UserName</legend>
                 <input type="text" name="username" id="username" placeholder="Enter UserName" required><br><br>
