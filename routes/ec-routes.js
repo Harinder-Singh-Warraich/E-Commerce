@@ -2,6 +2,7 @@ const express=require("express");
 const router=express.Router();
 const Product=require("../models/product");
 const Review=require("../models/review");
+const {isLoggedIn}=require("../middleware");
 
 //See all the products
 router.get("/products",async (req,res)=>{
@@ -15,11 +16,10 @@ router.get("/products/new",(req,res)=>{
 })
 
 //Add a new product
-router.post("/products",async (req,res)=>{
+router.post("/products",isLoggedIn, async (req,res)=>{
     const product={
         ...req.body
     }
-    console.log(product);
     await Product.create(product);
     req.flash("success","Product added successfully");
     res.redirect("/products");
@@ -33,7 +33,7 @@ router.get("/products/:id",async (req,res)=>{
 })
 
 //Edit product page
-router.get("/products/:id/edit",async (req,res)=>{
+router.get("/products/:id/edit",isLoggedIn, async (req,res)=>{
     const {id}=req.params;
     const product=await Product.findById(id);
     res.render("products/edit",{product});
@@ -48,21 +48,23 @@ router.patch("/products/:id",async (req,res)=>{
 })
 
 //Delete a product
-router.delete("/products/:id",async(req,res)=>{
+router.delete("/products/:id",isLoggedIn ,async(req,res)=>{
     const {id}=req.params;
     await Product.findByIdAndDelete(id);
+    req.flash("success","Product deleted successfully");
     res.redirect("/products");
 })
 
 //Enter a commment
-router.post("/products/:id/review",async(req,res)=>{
+router.post("/products/:id/review",isLoggedIn, async(req,res)=>{
     const {rating,comment}=req.body;
     const {id}=req.params;
     const product=await Product.findById(id);
-    const review=new Review({rating,comment});
+    const review=new Review({rating,comment,user:req.user.username});
     product.reviews.push(review);
     await review.save();
     await product.save();
+    req.flash("success","Review created");
     res.redirect(`/products/${id}`);
 })
 
